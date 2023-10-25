@@ -56,9 +56,34 @@ const getRandomInt = (max) => {
 }
 
 app.post('/api/persons', (request, response) => {
-  const note = request.body
-  note.id = getRandomInt(10000)
+  const body = request.body
   
+  if(!body.name) {
+    return response.status(404).json({
+      error: "Name is missing"
+    })
+  }
+
+  if(!body.number) {
+    return response.status(404).json({
+      error: "Number is missing"
+    })
+  }
+
+  const names = notes.map(n => n.name)
+
+  if(names.includes(body.name)) {
+    return response.status(400).json({
+      error: "Duplicate name"
+    })
+  }
+  
+  const note = {
+    name: body.name,
+    number: body.number,
+    id: getRandomInt(10000)
+  }
+
   notes = notes.concat(note)
   response.json(note)
 })
