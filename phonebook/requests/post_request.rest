@@ -1,0 +1,24 @@
+### Valid
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "New Name",
+  "number": "01-23-4567890"
+}
+
+### Invalid: No name
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "number": "01-23-4567890"
+}
+
+### Invalid: No numebr
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "New Name"
+}
